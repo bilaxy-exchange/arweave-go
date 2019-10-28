@@ -25,16 +25,12 @@ type Block struct {
 	Hash          string        `json:"hash"`
 	IndepHash     string        `json:"indep_hash"`
 	Txs           []interface{} `json:"txs"`
-	WalletList    []struct {
-		Wallet   string `json:"wallet"`
-		Quantity int64  `json:"quantity"`
-		LastTx   string `json:"last_tx"`
-	} `json:"wallet_list"`
-	RewardAddr string        `json:"reward_addr"`
-	Tags       []interface{} `json:"tags"`
-	RewardPool int           `json:"reward_pool"`
-	WeaveSize  int           `json:"weave_size"`
-	BlockSize  int           `json:"block_size"`
+	WalletList    string        `json:"wallet_list"`
+	RewardAddr    string        `json:"reward_addr"`
+	Tags          []interface{} `json:"tags"`
+	RewardPool    int           `json:"reward_pool"`
+	WeaveSize     int           `json:"weave_size"`
+	BlockSize     int           `json:"block_size"`
 }
 
 var allowedFields = map[string]bool{
