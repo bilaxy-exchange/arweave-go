@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/Dev43/arweave-go"
-	"github.com/Dev43/arweave-go/batchchunker"
-	"github.com/Dev43/arweave-go/chunker"
-	"github.com/Dev43/arweave-go/transactor"
-	"github.com/Dev43/arweave-go/tx"
+	"github.com/bilaxy-exchange/arweave-go"
+	"github.com/bilaxy-exchange/arweave-go/batchchunker"
+	"github.com/bilaxy-exchange/arweave-go/chunker"
+	"github.com/bilaxy-exchange/arweave-go/transactor"
+	"github.com/bilaxy-exchange/arweave-go/tx"
 )
 
 // BatchCombiner struct

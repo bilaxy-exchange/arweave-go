@@ -1,4 +1,4 @@
-module github.com/Dev43/arweave-go
+module github.com/bilaxy-exchange/arweave-go
 
 go 1.12
 

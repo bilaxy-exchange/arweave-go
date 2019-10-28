@@ -9,7 +9,7 @@ import (
 	"io/ioutil"
 	"math/big"
 
-	"github.com/Dev43/arweave-go/utils"
+	"github.com/bilaxy-exchange/arweave-go/utils"
 	"github.com/mendsley/gojwk"
 )
 

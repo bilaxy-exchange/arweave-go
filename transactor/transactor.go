@@ -8,9 +8,9 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/Dev43/arweave-go"
-	"github.com/Dev43/arweave-go/api"
-	"github.com/Dev43/arweave-go/tx"
+	"github.com/bilaxy-exchange/arweave-go"
+	"github.com/bilaxy-exchange/arweave-go/api"
+	"github.com/bilaxy-exchange/arweave-go/tx"
 )
 
 // defaultPort of the arweave client
