@@ -20,7 +20,7 @@ type Block struct {
 	PreviousBlock string        `json:"previous_block"`
 	Timestamp     int           `json:"timestamp"`
 	LastRetarget  int           `json:"last_retarget"`
-	Diff          int           `json:"diff"`
+	Diff          string        `json:"diff"`
 	Height        int           `json:"height"`
 	Hash          string        `json:"hash"`
 	IndepHash     string        `json:"indep_hash"`

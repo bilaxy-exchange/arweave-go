@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"math/big"
 
-	"github.com/Dev43/arweave-go"
-	"github.com/Dev43/arweave-go/utils"
+	"github.com/bilaxy-exchange/arweave-go"
+	"github.com/bilaxy-exchange/arweave-go/utils"
 )
 
 // NewTransaction creates a brand new transaction struct

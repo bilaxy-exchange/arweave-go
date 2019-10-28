@@ -3,7 +3,7 @@ package chunker
 import (
 	"encoding/json"
 
-	"github.com/Dev43/arweave-go/utils"
+	"github.com/bilaxy-exchange/arweave-go/utils"
 )
 
 // EncodedChunk is the data structure representing an encoded chunk on the arweave

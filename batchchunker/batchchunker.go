@@ -7,10 +7,10 @@ import (
 	"io"
 	"strings"
 
-	"github.com/Dev43/arweave-go"
-	"github.com/Dev43/arweave-go/chunker"
-	"github.com/Dev43/arweave-go/transactor"
-	"github.com/Dev43/arweave-go/wallet"
+	"github.com/bilaxy-exchange/arweave-go"
+	"github.com/bilaxy-exchange/arweave-go/chunker"
+	"github.com/bilaxy-exchange/arweave-go/transactor"
+	"github.com/bilaxy-exchange/arweave-go/wallet"
 )
 
 const chunkerVersion = "0.0.1"
