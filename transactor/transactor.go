@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"net/url"
+	"strconv"
 	"time"
 
 	"github.com/bilaxy-exchange/arweave-go"
@@ -63,7 +64,7 @@ func NewTransactor(fullURL string) (*Transactor, error) {
 }
 
 // CreateTransaction creates a brand new transaction
-func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSigner, amount string, data []byte, target string) (*tx.Transaction, error) {
+func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSigner, amount string, data []byte, target string, minFee int64) (*tx.Transaction, error) {
 	lastTx, err := tr.Client.LastTransaction(ctx, w.Address())
 	if err != nil {
 		return nil, err
@@ -74,6 +75,14 @@ func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSig
 		return nil, err
 	}
 
+	fee, err := strconv.ParseInt(price, 10, 64)
+	if err != nil {
+		return nil, err
+	}
+	if fee < minFee {
+		fee = minFee
+	}
+
 	// Non encoded transaction fields
 	tx := tx.NewTransaction(
 		lastTx,
@@ -81,7 +90,7 @@ func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSig
 		amount,
 		target,
 		data,
-		price,
+		fmt.Sprintf("%d", fee),
 	)
 
 	return tx, nil
