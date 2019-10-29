@@ -64,7 +64,7 @@ func NewTransactor(fullURL string) (*Transactor, error) {
 }
 
 // CreateTransaction creates a brand new transaction
-func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSigner, amount string, data []byte, target string, minFee int64) (*tx.Transaction, error) {
+func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSigner, amount string, data []byte, target string, minFee int64, includeFee bool) (*tx.Transaction, error) {
 	lastTx, err := tr.Client.LastTransaction(ctx, w.Address())
 	if err != nil {
 		return nil, err
@@ -81,6 +81,15 @@ func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSig
 	}
 	if fee < minFee {
 		fee = minFee
+	}
+
+	if includeFee {
+		amountInt, err := strconv.ParseInt(amount, 10, 64)
+		if err != nil {
+			return nil, err
+		}
+		amountInt = amountInt - fee
+		amount = fmt.Sprintf("%d", amountInt)
 	}
 
 	// Non encoded transaction fields
