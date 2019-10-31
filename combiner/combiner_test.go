@@ -25,7 +25,7 @@ type mockArClient struct {
 func (m *mockArClient) LastTransaction(ctx context.Context, address string) (string, error) {
 	return m.LastTx, m.LastTxErr
 }
-func (m *mockArClient) GetReward(ctx context.Context, data []byte) (string, error) {
+func (m *mockArClient) GetReward(ctx context.Context, data []byte, target string) (string, error) {
 	return "1", nil
 }
 func (m *mockArClient) Commit(ctx context.Context, data []byte) (string, error) {
