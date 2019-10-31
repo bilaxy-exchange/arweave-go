@@ -22,7 +22,7 @@ func (m *mockCaller) LastTransaction(ctx context.Context, address string) (strin
 	return m.LastTx, nil
 }
 
-func (m *mockCaller) GetReward(ctx context.Context, data []byte) (string, error) {
+func (m *mockCaller) GetReward(ctx context.Context, data []byte, target string) (string, error) {
 	return m.Reward, nil
 }
 

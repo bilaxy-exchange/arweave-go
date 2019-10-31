@@ -134,8 +134,8 @@ func (c *Client) GetCurrentBlock(ctx context.Context) (*Block, error) {
 }
 
 // GetReward requests the current network reward
-func (c *Client) GetReward(ctx context.Context, data []byte) (string, error) {
-	body, err := c.get(ctx, fmt.Sprintf("price/%d", len(data)))
+func (c *Client) GetReward(ctx context.Context, data []byte, target string) (string, error) {
+	body, err := c.get(ctx, fmt.Sprintf("price/%d/%s", len(data), target))
 	if err != nil {
 		return "", err
 	}
