@@ -65,7 +65,7 @@ func NewTransactor(fullURL string) (*Transactor, error) {
 }
 
 // CreateTransaction creates a brand new transaction
-func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSigner, amount string, data []byte, target string, minFee int64, includeFee bool) (*tx.Transaction, error) {
+func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSigner, amount string, data []byte, target string, minFee int64, maxFee int64, includeFee bool) (*tx.Transaction, error) {
 	lastTx, err := tr.Client.TxAnchor(ctx)
 	if err != nil {
 		return nil, err
@@ -82,6 +82,8 @@ func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSig
 	}
 	if fee < minFee {
 		fee = minFee
+	} else if fee > maxFee {
+		return nil, fmt.Errorf("transfer fee exceeds limit -> %d ", maxFee)
 	}
 
 	if includeFee {
