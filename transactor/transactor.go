@@ -108,6 +108,34 @@ func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSig
 	return tx, nil
 }
 
+func (tr *Transactor) CreateTransactionWithFee(ctx context.Context, w arweave.WalletSigner, amount string, data []byte, target string, fee int64, includeFee bool) (*tx.Transaction, error) {
+	lastTx, err := tr.Client.TxAnchor(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	if includeFee {
+		amountInt, err := strconv.ParseInt(amount, 10, 64)
+		if err != nil {
+			return nil, err
+		}
+		amountInt = amountInt - fee
+		amount = fmt.Sprintf("%d", amountInt)
+	}
+
+	// Non encoded transaction fields
+	tx := tx.NewTransaction(
+		lastTx,
+		w.PubKeyModulus(),
+		amount,
+		target,
+		data,
+		fmt.Sprintf("%d", fee),
+	)
+
+	return tx, nil
+}
+
 // SendTransaction formats the transactions (base64url encodes the necessary fields)
 // marshalls the Json and sends it to the arweave network
 func (tr *Transactor) SendTransaction(ctx context.Context, tx *tx.Transaction) (string, error) {
