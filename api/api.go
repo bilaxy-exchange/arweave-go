@@ -68,6 +68,24 @@ func (c *Client) GetTransaction(ctx context.Context, txID string) (*tx.Transacti
 	return &tx, nil
 }
 
+// GetTransactionStatus requests the status of a transaction
+func (c *Client) GetTransactionStatus(ctx context.Context, txID string) (*tx.TransactionStatus, error) {
+	body, err := c.get(ctx, fmt.Sprintf("tx/%s/status", txID))
+	if err != nil {
+		return nil, err
+	}
+	// If it sends us a pending message, return a nil receipt and error
+	if string(body) == "Pending" {
+		return nil, nil
+	}
+	txStatus := tx.TransactionStatus{}
+	err = json.Unmarshal(body, &txStatus)
+	if err != nil {
+		return nil, err
+	}
+	return &txStatus, nil
+}
+
 // GetTransaction requests the information of a transaction
 func (c *Client) GetPendingTransactions(ctx context.Context) ([]string, error) {
 	body, err := c.get(ctx, fmt.Sprintf("tx/pending"))

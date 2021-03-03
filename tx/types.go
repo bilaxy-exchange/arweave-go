@@ -42,3 +42,9 @@ type Tag struct {
 	Name  string `json:"name"`
 	Value string `json:"value"`
 }
+
+type TransactionStatus struct {
+	BlockHeight           int    `json:"block_height"`
+	BlockIndepHash        string `json:"block_indep_hash"`
+	NumberOfConfirmations int    `json:"number_of_confirmations"`
+}
