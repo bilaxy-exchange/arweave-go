@@ -16,3 +16,4 @@ arweave.json
 main.go
 
 .idea
+go.sum

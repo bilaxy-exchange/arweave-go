@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/bilaxy-exchange/arweave-go"
-	"github.com/bilaxy-exchange/arweave-go/utils"
+	"github.com/ccyte/arweave-go"
+	"github.com/ccyte/arweave-go/utils"
 )
 
 // NewTransaction creates a brand new transaction struct

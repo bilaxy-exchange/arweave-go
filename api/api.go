@@ -10,7 +10,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/bilaxy-exchange/arweave-go/tx"
+	"github.com/ccyte/arweave-go/tx"
 )
 
 // Client struct

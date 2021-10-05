@@ -9,9 +9,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/bilaxy-exchange/arweave-go"
-	"github.com/bilaxy-exchange/arweave-go/api"
-	"github.com/bilaxy-exchange/arweave-go/tx"
+	"github.com/ccyte/arweave-go"
+	"github.com/ccyte/arweave-go/api"
+	"github.com/ccyte/arweave-go/tx"
 )
 
 // defaultPort of the arweave client

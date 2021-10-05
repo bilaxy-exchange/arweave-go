@@ -5,8 +5,8 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/bilaxy-exchange/arweave-go/tx"
-	"github.com/bilaxy-exchange/arweave-go/utils"
+	"github.com/ccyte/arweave-go/tx"
+	"github.com/ccyte/arweave-go/utils"
 	"github.com/stretchr/testify/assert"
 )
 
