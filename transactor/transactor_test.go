@@ -89,7 +89,7 @@ func TestCreateTransaction(t *testing.T) {
 
 	for _, c := range cases {
 		tr := Transactor{Client: c.caller}
-		tx, err := tr.CreateTransaction(ctx, c.wallet, c.quantity, c.data, c.target)
+		tx, err := tr.CreateTransaction(ctx, c.wallet, c.quantity, c.data, c.target, 0, 0, false)
 		if err != nil {
 			t.Fatal(err)
 		}

@@ -96,16 +96,14 @@ func (tr *Transactor) CreateTransaction(ctx context.Context, w arweave.WalletSig
 	}
 
 	// Non encoded transaction fields
-	tx := tx.NewTransaction(
+	return tx.NewTransaction(
 		lastTx,
 		w.PubKeyModulus(),
 		amount,
 		target,
 		data,
 		fmt.Sprintf("%d", fee),
-	)
-
-	return tx, nil
+	), nil
 }
 
 func (tr *Transactor) CreateTransactionWithFee(ctx context.Context, w arweave.WalletSigner, amount string, data []byte, target string, fee int64, includeFee bool) (*tx.Transaction, error) {
@@ -124,16 +122,14 @@ func (tr *Transactor) CreateTransactionWithFee(ctx context.Context, w arweave.Wa
 	}
 
 	// Non encoded transaction fields
-	tx := tx.NewTransaction(
+	return tx.NewTransaction(
 		lastTx,
 		w.PubKeyModulus(),
 		amount,
 		target,
 		data,
 		fmt.Sprintf("%d", fee),
-	)
-
-	return tx, nil
+	), nil
 }
 
 // SendTransaction formats the transactions (base64url encodes the necessary fields)

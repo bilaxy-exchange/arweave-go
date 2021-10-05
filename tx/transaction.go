@@ -3,6 +3,7 @@ package tx
 import (
 	"crypto/sha256"
 	"encoding/json"
+	"fmt"
 	"math/big"
 
 	"github.com/bilaxy-exchange/arweave-go"
@@ -12,6 +13,9 @@ import (
 // NewTransaction creates a brand new transaction struct
 func NewTransaction(lastTx string, owner *big.Int, quantity string, target string, data []byte, reward string) *Transaction {
 	return &Transaction{
+		format:   2,
+		dataRoot: "",
+		dataSize: "0",
 		lastTx:   lastTx,
 		owner:    owner,
 		quantity: quantity,
@@ -20,6 +24,18 @@ func NewTransaction(lastTx string, owner *big.Int, quantity string, target strin
 		reward:   reward,
 		tags:     make([]Tag, 0),
 	}
+}
+
+func (t *Transaction) Format() int {
+	return t.format
+}
+
+func (t *Transaction) DataRoot() string {
+	return t.dataRoot
+}
+
+func (t *Transaction) DataSize() string {
+	return t.dataSize
 }
 
 // Data returns the data of the transaction
@@ -150,7 +166,7 @@ func (t *Transaction) Sign(w arweave.WalletSigner) (*Transaction, error) {
 
 // MarshalJSON marshals as JSON
 func (t *Transaction) MarshalJSON() ([]byte, error) {
-	return json.Marshal(t.format())
+	return json.Marshal(t.format2JSON())
 }
 
 // UnmarshalJSON unmarshals as JSON
@@ -160,6 +176,11 @@ func (t *Transaction) UnmarshalJSON(input []byte) error {
 	if err != nil {
 		return err
 	}
+
+	t.format = txn.Format
+	t.dataSize = txn.DataSize
+	t.dataRoot = txn.DataRoot
+
 	id, err := utils.DecodeString(txn.ID)
 	if err != nil {
 		return err
@@ -216,9 +237,12 @@ func (t *Transaction) FormatMsgBytes() ([]byte, error) {
 		return nil, err
 	}
 
+	msg = append(msg, fmt.Sprintf("%d", t.format)...)
 	msg = append(msg, t.owner.Bytes()...)
 	msg = append(msg, target...)
-	msg = append(msg, t.data...)
+	msg = append(msg, t.dataRoot...)
+	msg = append(msg, t.dataSize...)
+	//msg = append(msg, t.data...)
 	msg = append(msg, t.quantity...)
 	msg = append(msg, t.reward...)
 	msg = append(msg, lastTx...)
@@ -243,8 +267,11 @@ func (t *Transaction) encodeTagData() (string, error) {
 }
 
 // Format formats the transactions to a JSONTransaction that can be sent out to an arweave node
-func (t *Transaction) format() *transactionJSON {
+func (t *Transaction) format2JSON() *transactionJSON {
 	return &transactionJSON{
+		Format:    t.format,
+		DataRoot:  t.dataRoot,
+		DataSize:  t.dataSize,
 		ID:        utils.EncodeToBase64(t.id),
 		LastTx:    t.lastTx,
 		Owner:     utils.EncodeToBase64(t.owner.Bytes()),
